@@ -1,4 +1,5 @@
 # https://github.com/elastic/kibana/blob/master/src/server/config/kibana.yml
+# https://www.elastic.co/guide/en/kibana/current/_setting_kibana_server_properties.html
 
 default['kibana']['config']['port'] = 5601
 default['kibana']['config']['host'] = node['ipaddress']
