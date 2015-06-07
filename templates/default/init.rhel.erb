@@ -1,0 +1,95 @@
+#! /bin/sh
+#
+# chkconfig: - 55 45
+# description:  Kibana Service
+# processname: kibana
+# config: /etc/sysconfig/kibana
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+USER="<%= @user -%>"
+LOG_FILE="<%= @log_file -%>"
+PID_FILE="<%= @pid_file -%>"
+ELASTICSEARCH_URL="<%= @elasticsearch_url -%>"
+
+if [ -f /etc/sysconfig/kibana ];then
+    . /etc/sysconfig/kibana
+fi
+
+# Check that networking is up.
+if [ "$NETWORKING" = "no" ]
+then
+    exit 0
+fi
+
+RETVAL=0
+prog="<%= @daemon -%>"
+
+DAEMON_ARGS="--config <%= @conf_file -%>"
+
+check_elasticsearch_url () {
+    if [ -z $ELASTICSEARCH_URL ]; then
+      echo "\$ELASTICSEARCH_URL is not configured .."
+      exit 1
+    fi
+
+    curl -s $ELASTICSEARCH_URL/ > /dev/null
+    RETVAL=$?
+    if ! [ $RETVAL = 0 ]; then
+      echo "ElasticSearch URL ($ELASTICSEARCH_URL) is down .."
+      exit $RETVAL
+    fi
+}
+
+start () {
+    check_elasticsearch_url
+    echo -n $"Starting Kibana: "
+    daemon --user ${USER} --pidfile $PID_FILE ${prog} $DAEMON_ARGS >> $LOG_FILE 2>&1 &
+    RETVAL=$?
+    if [ $RETVAL = 0 ]; then
+      # touch /var/lock/subsys/kibana
+      echo_success
+    else
+      echo_failure
+    fi
+    echo
+    return $RETVAL
+}
+stop () {
+    echo -n $"Stopping Kibana: "
+    killproc -p $PID_FILE ${prog}
+    RETVAL=$?
+    echo
+    if [ $RETVAL -eq 0 ] ; then
+        rm -f /var/lock/subsys/kibana
+    fi
+}
+
+restart () {
+    stop
+    start
+}
+
+
+# See how we were called.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status -p $PID_FILE ${prog}
+    RETVAL=$?
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|status|restart}"
+    RETVAL=1
+esac
+
+exit $RETVAL
