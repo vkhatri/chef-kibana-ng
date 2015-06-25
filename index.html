@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Chef Kibana by vkhatri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Chef Kibana</h1>
+      <h2 class="project-tagline">Chef Cookbook to Manage ElasticSearch Kibana</h2>
+      <a href="https://github.com/vkhatri/chef-kibana-ng" class="btn">View on GitHub</a>
+      <a href="https://github.com/vkhatri/chef-kibana-ng/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/vkhatri/chef-kibana-ng/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="kibana-ng-cookbook" class="anchor" href="#kibana-ng-cookbook" aria-hidden="true"><span class="octicon octicon-link"></span></a>kibana-ng Cookbook</h1>
+
+<p><a href="https://travis-ci.org/vkhatri/chef-kibana-ng"><img src="https://travis-ci.org/vkhatri/chef-kibana-ng.svg?branch=master" alt="Build Status"></a></p>
+
+<p>This is a <a href="https://www.chef.io/">Chef</a> cookbook to manage <a href="https://github.com/elastic/kibana/">Kibana</a>.</p>
+
+<p>This cookbook was heavily inspired from simple-kibana cookbook maintained by jsirex.</p>
+
+<h2>
+<a id="repository" class="anchor" href="#repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repository</h2>
+
+<p><a href="https://github.com/vkhatri/chef-kibana-ng">https://github.com/vkhatri/chef-kibana-ng</a></p>
+
+<h2>
+<a id="supported-version" class="anchor" href="#supported-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported Version</h2>
+
+<p>This cookbook was tested for Kibana v4.0.2.</p>
+
+<h2>
+<a id="supported-os" class="anchor" href="#supported-os" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported OS</h2>
+
+<p>This cookbook was tested on Amazon Linux and expected to work on other RHEL platforms.</p>
+
+<h2>
+<a id="recipes" class="anchor" href="#recipes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Recipes</h2>
+
+<ul>
+<li><p><code>kibana-ng::default</code> - default recipe (used for run_list)</p></li>
+<li><p><code>kibana-ng::install</code> - wrapper recipe to install kibana</p></li>
+<li><p><code>kibana-ng::config</code> - configures kibana</p></li>
+<li><p><code>kibana-ng::service</code> - configure kibana service</p></li>
+<li><p><code>kibana-ng::source</code> - install kibana from source</p></li>
+<li><p><code>kibana-ng::user</code> - install user / group for kibana</p></li>
+</ul>
+
+<h2>
+<a id="core-attributes" class="anchor" href="#core-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Core Attributes</h2>
+
+<ul>
+<li><p><code>default['kibana']['version']</code> (default: <code>4.0.2</code>): kibana version</p></li>
+<li><p><code>default['kibana']['tarball_url']</code> (default: ): kibana download source url</p></li>
+<li><p><code>default['kibana']['tarball_checksum']</code> (default: ): kibana download source url</p></li>
+<li><p><code>default['kibana']['user']</code> (default: <code>kibana</code>): kibana user</p></li>
+<li><p><code>default['kibana']['group']</code> (default: <code>kibana</code>): kibana group</p></li>
+<li><p><code>default['kibana']['setup_user']</code> (default: <code>true</code>): setup kibana user group</p></li>
+<li><p><code>default['kibana']['service_name']</code> (default: <code>kibana</code>): kibana service name</p></li>
+<li><p><code>default['kibana']['service_type']</code> (default: <code>sysv</code>): kibana service type, currently supports only <code>sysv</code></p></li>
+<li><p><code>default['kibana']['install_method']</code> (default: <code>source</code>): kibana install method, currently supports only <code>source</code></p></li>
+<li><p><code>default['kibana']['umask']</code> (default: <code>0022</code>): execute resource umask</p></li>
+<li><p><code>default['kibana']['dir_mode']</code> (default: ``): kibana file/dir resource mode</p></li>
+<li><p><code>default['kibana']['parent_dir']</code> (default: <code>/opt/kibana</code>): kibana parent/home directory for different versions</p></li>
+<li><p><code>default['kibana']['log_dir']</code> (default: <code>/var/log/kibana</code>): kibana service log</p></li>
+<li><p><code>default['kibana']['conf_dir']</code> (default: <code>/etc/kibana</code>): kibana yaml configuration file directory</p></li>
+<li><p><code>default['kibana']['install_dir']</code> (default: <code>/opt/kibana/kibana</code>): kibana install / current version location, symlink to current version location</p></li>
+<li><p><code>default['kibana']['version_dir']</code> (default: <code>/opt/kibana/kibana-VERSION</code>): kibana version's directory location</p></li>
+<li><p><code>default['kibana']['daemon']</code> (default: <code>/opt/kibana/kibana/bin/kibana</code>): kibana bin location</p></li>
+<li><p><code>default['kibana']['conf_file']</code> (default: <code>/etc/kibana/kibana.yml</code>): kibana configuration file</p></li>
+<li><p><code>default['kibana']['log_file']</code> (default: <code>/var/log/kibana/kibana.log</code>): kibana log file location</p></li>
+<li><p><code>default['kibana']['pid_file']</code> (default: <code>/opt/kibana/kibana/kibana.pid</code>): kibana service pid file location</p></li>
+</ul>
+
+<h2>
+<a id="configuration-file-kibanayml-attributes" class="anchor" href="#configuration-file-kibanayml-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration File kibana.yml Attributes</h2>
+
+<ul>
+<li><p><code>default['kibana']['config']['port']</code> (default: <code>5601</code>): kibana port</p></li>
+<li><p><code>default['kibana']['config']['host']</code> (default: <code>node['ipaddress']</code>): kibana host address</p></li>
+<li><p><code>default['kibana']['config']['pid_file']</code> (default: <code>/opt/kibana/kibana/kibana.pid</code>): kibana pid file location</p></li>
+<li><p><code>default['kibana']['config']['elasticsearch_url']</code> (default: <code>http://localhost:9200</code>): elasticsearch url</p></li>
+<li><p><code>default['kibana']['config']['kibana_index']</code> (default: <code>.kibana</code>): elasticsearch index</p></li>
+<li><p><code>default['kibana']['config']['default_app_id']</code> (default: <code>discover</code>):</p></li>
+<li><p><code>default['kibana']['config']['request_timeout']</code> (default: <code>300_000</code>):</p></li>
+<li><p><code>default['kibana']['config']['shard_timeout']</code> (default: <code>0</code>):</p></li>
+<li><p><code>default['kibana']['config']['verify_ssl']</code> (default: <code>true</code>):</p></li>
+<li><p><code>default['kibana']['config']['bundled_plugin_ids']</code> (default: <code>[]</code>):</p></li>
+</ul>
+
+<p>For more attribute info, visit below links:</p>
+
+<p><a href="https://github.com/elastic/kibana/blob/master/src/server/config/kibana.yml">https://github.com/elastic/kibana/blob/master/src/server/config/kibana.yml</a></p>
+
+<p><a href="https://www.elastic.co/guide/en/kibana/current/_setting_kibana_server_properties.html">https://www.elastic.co/guide/en/kibana/current/_setting_kibana_server_properties.html</a></p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork the repository on Github</li>
+<li>Create a named feature branch (like <code>add_component_x</code>)</li>
+<li>Write your change</li>
+<li>Write tests for your change (if applicable)</li>
+<li>Run the tests (<code>rake &amp; rake knife</code>), ensuring they all pass</li>
+<li>Write new resource/attribute description to <code>README.md</code>
+</li>
+<li>Write description about changes to PR</li>
+<li>Submit a Pull Request using Github</li>
+</ol>
+
+<h2>
+<a id="copyright--license" class="anchor" href="#copyright--license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright &amp; License</h2>
+
+<p>Authors:: Virender Khatri and <a href="https://github.com/vkhatri/chef-kibana-ng/graphs/contributors">Contributors</a></p>
+
+<pre>
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</pre>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/vkhatri/chef-kibana-ng">Chef Kibana</a> is maintained by <a href="https://github.com/vkhatri">vkhatri</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
