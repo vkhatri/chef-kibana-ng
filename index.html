@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Chef Kibana by vkhatri</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">Chef Kibana</h1>
-      <h2 class="project-tagline">Chef Cookbook to Manage ElasticSearch Kibana</h2>
-      <a href="https://github.com/vkhatri/chef-kibana-ng" class="btn">View on GitHub</a>
-      <a href="https://github.com/vkhatri/chef-kibana-ng/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/vkhatri/chef-kibana-ng/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <div class="wrapper">
+      <header>
+        <h1>Chef Kibana</h1>
+        <p>Chef Cookbook to Manage ElasticSearch Kibana</p>
 
-    <section class="main-content">
-      <h1>
+        <p class="view"><a href="https://github.com/vkhatri/chef-kibana-ng">View the Project on GitHub <small>vkhatri/chef-kibana-ng</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/vkhatri/chef-kibana-ng/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/vkhatri/chef-kibana-ng/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/vkhatri/chef-kibana-ng">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
 <a id="kibana-ng-cookbook" class="anchor" href="#kibana-ng-cookbook" aria-hidden="true"><span class="octicon octicon-link"></span></a>kibana-ng Cookbook</h1>
 
 <p><a href="https://travis-ci.org/vkhatri/chef-kibana-ng"><img src="https://travis-ci.org/vkhatri/chef-kibana-ng.svg?branch=master" alt="Build Status"></a></p>
@@ -36,12 +45,12 @@
 <h2>
 <a id="supported-version" class="anchor" href="#supported-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported Version</h2>
 
-<p>This cookbook was tested for Kibana v4.0.2.</p>
+<p>This cookbook was tested for Kibana v4.0.2+ x86_64 version.</p>
 
 <h2>
 <a id="supported-os" class="anchor" href="#supported-os" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported OS</h2>
 
-<p>This cookbook was tested on Amazon Linux and expected to work on other RHEL platforms.</p>
+<p>This cookbook was tested on Amazon Linux &amp; Ubuntu and expected to work on other RHEL platforms.</p>
 
 <h2>
 <a id="recipes" class="anchor" href="#recipes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Recipes</h2>
@@ -50,6 +59,7 @@
 <li><p><code>kibana-ng::default</code> - default recipe (used for run_list)</p></li>
 <li><p><code>kibana-ng::install</code> - wrapper recipe to install kibana</p></li>
 <li><p><code>kibana-ng::config</code> - configures kibana</p></li>
+<li><p><code>kibana-ng::nginx</code> - configure kibana nginx proxy</p></li>
 <li><p><code>kibana-ng::service</code> - configure kibana service</p></li>
 <li><p><code>kibana-ng::source</code> - install kibana from source</p></li>
 <li><p><code>kibana-ng::user</code> - install user / group for kibana</p></li>
@@ -59,9 +69,9 @@
 <a id="core-attributes" class="anchor" href="#core-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Core Attributes</h2>
 
 <ul>
-<li><p><code>default['kibana']['version']</code> (default: <code>4.0.2</code>): kibana version</p></li>
+<li><p><code>default['kibana']['version']</code> (default: <code>4.1.0</code>): kibana version</p></li>
 <li><p><code>default['kibana']['tarball_url']</code> (default: ): kibana download source url</p></li>
-<li><p><code>default['kibana']['tarball_checksum']</code> (default: ): kibana download source url</p></li>
+<li><p><code>default['kibana']['tarball_checksum']</code> (default: version checksum hash): kibana source sha256sum</p></li>
 <li><p><code>default['kibana']['user']</code> (default: <code>kibana</code>): kibana user</p></li>
 <li><p><code>default['kibana']['group']</code> (default: <code>kibana</code>): kibana group</p></li>
 <li><p><code>default['kibana']['setup_user']</code> (default: <code>true</code>): setup kibana user group</p></li>
@@ -79,6 +89,10 @@
 <li><p><code>default['kibana']['conf_file']</code> (default: <code>/etc/kibana/kibana.yml</code>): kibana configuration file</p></li>
 <li><p><code>default['kibana']['log_file']</code> (default: <code>/var/log/kibana/kibana.log</code>): kibana log file location</p></li>
 <li><p><code>default['kibana']['pid_file']</code> (default: <code>/opt/kibana/kibana/kibana.pid</code>): kibana service pid file location</p></li>
+<li><p><code>default['kibana']['auth_users']</code> (default: <code>{guest:hash}</code>): nginx auth users hash</p></li>
+<li><p><code>default['kibana']['nginx_port']</code> (default: <code>{guest:hash}</code>): nginx auth users hash</p></li>
+<li><p><code>default['kibana']['nginx_auth_file']</code> (default: <code>calculated</code>): nginx auth users file</p></li>
+<li><p><code>default['kibana']['nginx_port']</code> (default: <code>80</code>): nginx proxy port</p></li>
 </ul>
 
 <h2>
@@ -86,7 +100,7 @@
 
 <ul>
 <li><p><code>default['kibana']['config']['port']</code> (default: <code>5601</code>): kibana port</p></li>
-<li><p><code>default['kibana']['config']['host']</code> (default: <code>node['ipaddress']</code>): kibana host address</p></li>
+<li><p><code>default['kibana']['config']['host']</code> (default: <code>127.0.0.1</code>): kibana host address</p></li>
 <li><p><code>default['kibana']['config']['pid_file']</code> (default: <code>/opt/kibana/kibana/kibana.pid</code>): kibana pid file location</p></li>
 <li><p><code>default['kibana']['config']['elasticsearch_url']</code> (default: <code>http://localhost:9200</code>): elasticsearch url</p></li>
 <li><p><code>default['kibana']['config']['kibana_index']</code> (default: <code>.kibana</code>): elasticsearch index</p></li>
@@ -136,16 +150,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </pre>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/vkhatri/chef-kibana-ng">Chef Kibana</a> is maintained by <a href="https://github.com/vkhatri">vkhatri</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/vkhatri">vkhatri</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
-
-    </section>
-
-  
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
-
