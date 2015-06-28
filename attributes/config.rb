@@ -2,7 +2,7 @@
 # https://www.elastic.co/guide/en/kibana/current/_setting_kibana_server_properties.html
 
 default['kibana']['config']['port'] = 5601
-default['kibana']['config']['host'] = node['ipaddress']
+default['kibana']['config']['host'] = '127.0.0.1'
 default['kibana']['config']['pid_file'] = ::File.join(node['kibana']['parent_dir'], 'kibana.pid')
 default['kibana']['config']['elasticsearch_url'] = 'http://localhost:9200'
 default['kibana']['config']['kibana_index'] = '.kibana'
