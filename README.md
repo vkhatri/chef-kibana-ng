@@ -15,7 +15,7 @@ https://github.com/vkhatri/chef-kibana-ng
 
 ## Supported Version
 
-This cookbook was tested for Kibana v4.0.2.
+This cookbook was tested for Kibana v4.0.2+ x86_64 version.
 
 
 ## Supported OS
@@ -31,6 +31,8 @@ This cookbook was tested on Amazon Linux and expected to work on other RHEL plat
 
 - `kibana-ng::config` - configures kibana
 
+- `kibana-ng::nginx` - configure kibana nginx proxy
+
 - `kibana-ng::service` - configure kibana service
 
 - `kibana-ng::source` - install kibana from source
@@ -41,11 +43,11 @@ This cookbook was tested on Amazon Linux and expected to work on other RHEL plat
 ## Core Attributes
 
 
-* `default['kibana']['version']` (default: `4.0.2`): kibana version
+* `default['kibana']['version']` (default: `4.1.0`): kibana version
 
 * `default['kibana']['tarball_url']` (default: ): kibana download source url
 
-* `default['kibana']['tarball_checksum']` (default: ): kibana download source url
+* `default['kibana']['tarball_checksum']` (default: version checksum hash): kibana source sha256sum
 
 * `default['kibana']['user']` (default: `kibana`): kibana user
 
@@ -81,12 +83,20 @@ This cookbook was tested on Amazon Linux and expected to work on other RHEL plat
 
 * `default['kibana']['pid_file']` (default: `/opt/kibana/kibana/kibana.pid`): kibana service pid file location
 
+* `default['kibana']['auth_users']` (default: `{guest:hash}`): nginx auth users hash
+
+* `default['kibana']['nginx_port']` (default: `{guest:hash}`): nginx auth users hash
+
+* `default['kibana']['nginx_auth_file']` (default: `calculated`): nginx auth users file
+
+* `default['kibana']['nginx_port']` (default: `80`): nginx proxy port
+
 
 ## Configuration File kibana.yml Attributes
 
 * `default['kibana']['config']['port']` (default: `5601`): kibana port
 
-* `default['kibana']['config']['host']` (default: `node['ipaddress']`): kibana host address
+* `default['kibana']['config']['host']` (default: `127.0.0.1`): kibana host address
 
 * `default['kibana']['config']['pid_file']` (default: `/opt/kibana/kibana/kibana.pid`): kibana pid file location
 
