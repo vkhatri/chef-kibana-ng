@@ -39,7 +39,7 @@ execute 'extract_kibana_tarball' do
   umask node['kibana']['umask']
   cwd node['kibana']['parent_dir']
   command "tar xzf #{tarball_file}"
-  creates node['kibana']['daemon']
+  creates ::File.join(node['kibana']['version_dir'], 'bin', 'kibana')
   notifies :restart, 'service[kibana]', :delayed
 end
 
