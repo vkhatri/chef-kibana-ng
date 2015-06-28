@@ -20,7 +20,7 @@ This cookbook was tested for Kibana v4.0.2+ x86_64 version.
 
 ## Supported OS
 
-This cookbook was tested on Amazon Linux and expected to work on other RHEL platforms.
+This cookbook was tested on Amazon Linux & Ubuntu and expected to work on other RHEL platforms.
 
 
 ## Recipes

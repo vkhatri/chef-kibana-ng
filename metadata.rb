@@ -8,6 +8,6 @@ version '0.1.1'
 
 depends 'nginx'
 
-%w(amazon centos fedora).each do |os|
+%w(amazon centos fedora ubuntu).each do |os|
   supports os
 end
