@@ -12,6 +12,8 @@ default['kibana']['notify_restart'] = true
 
 default['kibana']['install_method'] = 'source' # options: source
 
+default['kibana']['auth_users']    = { 'guest' => '$apr1$cA/eVUgT$aIoWUPwV5uONJoYslb7lg0' }
+
 default['kibana']['umask']        = '0022'
 default['kibana']['dir_mode']     = '0755'
 default['kibana']['parent_dir']   = '/opt/kibana'
@@ -24,3 +26,8 @@ default['kibana']['daemon']       = ::File.join(node['kibana']['version_dir'], '
 default['kibana']['conf_file'] = ::File.join(node['kibana']['conf_dir'], 'kibana.yml')
 default['kibana']['log_file'] = ::File.join(node['kibana']['log_dir'], 'kibana.log')
 default['kibana']['pid_file'] = ::File.join(node['kibana']['parent_dir'], 'kibana.pid')
+
+default['kibana']['nginx_auth_file'] = ::File.join(node['nginx']['dir'], 'htpasswd.kibana')
+default['kibana']['nginx_port'] = 80
+
+default['nginx']['default_site_enabled']   = false

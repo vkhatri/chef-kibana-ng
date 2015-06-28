@@ -20,3 +20,4 @@
 include_recipe 'kibana-ng::install'
 include_recipe 'kibana-ng::config'
 include_recipe 'kibana-ng::service'
+include_recipe 'kibana-ng::nginx'

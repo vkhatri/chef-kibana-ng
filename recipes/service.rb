@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: kibana-ng
-# Recipe:: source
+# Recipe:: service
 #
 # Copyright 2015, Virender Khatri
 #
