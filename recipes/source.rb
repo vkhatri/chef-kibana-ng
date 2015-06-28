@@ -22,13 +22,14 @@ tarball_file  = ::File.join(node['kibana']['parent_dir'], ::File.basename(node['
 # stop kibana service if running for version upgrade
 service 'kibana' do
   action :stop
-  only_if { File.exist?("/etc/init.d/#{node['kibana']['service_name']}") && !File.exist?(node['kibana']['version_dir']) }
+  only_if { ::File.exist?("/etc/init.d/#{node['kibana']['service_name']}") && !::File.exist?(node['kibana']['version_dir']) }
 end
 
 # kibana version tarball
 remote_file tarball_file do
   source node['kibana']['tarball_url']
-  not_if { File.exist?(node['kibana']['daemon']) }
+  checksum node['kibana']['tarball_checksum'][node['kibana']['version']]
+  not_if { ::File.exist?(::File.join(node['kibana']['version_dir'], 'bin', 'kibana')) }
 end
 
 # extract tarball
