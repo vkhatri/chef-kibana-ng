@@ -21,7 +21,7 @@ default['kibana']['log_dir']      = '/var/log/kibana'
 default['kibana']['conf_dir']     = '/etc/kibana'
 default['kibana']['install_dir']  = ::File.join(node['kibana']['parent_dir'], 'kibana')
 default['kibana']['version_dir']  = node['kibana']['parent_dir'] + '/kibana-' + node['kibana']['version'] + '-linux-x64'
-default['kibana']['daemon']       = ::File.join(node['kibana']['version_dir'], 'bin', 'kibana')
+default['kibana']['daemon']       = ::File.join(node['kibana']['install_dir'], 'bin', 'kibana')
 
 default['kibana']['conf_file'] = ::File.join(node['kibana']['conf_dir'], 'kibana.yml')
 default['kibana']['log_file'] = ::File.join(node['kibana']['log_dir'], 'kibana.log')
