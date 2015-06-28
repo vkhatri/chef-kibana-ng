@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: kibana-ng
-# Recipe:: default
+# Recipe:: config
 #
 # Copyright 2015, Virender Khatri
 #
@@ -21,5 +21,6 @@ file node['kibana']['conf_file'] do
   content JSON.parse(node['kibana']['config'].to_json).to_yaml.lines.to_a[1..-1].join
   owner node['kibana']['user']
   group node['kibana']['group']
-  mode '0644'
+  mode 0644
+  notifies :restart, 'service[kibana]', :delayed if node['kibana']['notify_restart']
 end
