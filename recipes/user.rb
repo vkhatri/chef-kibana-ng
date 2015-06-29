@@ -28,6 +28,7 @@
 #
 
 group node['kibana']['group'] do
+  system true
   action :create
   only_if { node['kibana']['setup_user'] }
 end
