@@ -3,6 +3,11 @@ kibana-ng CHANGELOG
 
 This file is used to list changes made in each version of the kibana-ng cookbook.
 
+0.1.9
+-----
+
+- Virender Khatri - issue #1, bump kibana version to 4.1.1
+
 0.1.8
 -----
 
