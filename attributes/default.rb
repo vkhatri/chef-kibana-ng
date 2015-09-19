@@ -1,4 +1,4 @@
-default['kibana']['version'] = '4.1.1'
+default['kibana']['version'] = '4.1.2'
 default['kibana']['tarball_url'] = "https://download.elasticsearch.org/kibana/kibana/kibana-#{node['kibana']['version']}-linux-x64.tar.gz"
 default['kibana']['tarball_checksum']['4.0.2'] = '4cc36e5c6ca7c495667319df75feda1facb7c43a3d9686841f07a2522adec294'
 default['kibana']['tarball_checksum']['4.1.0'] = '597e1b1e381b9a9ed9f8a66e115ec4d7a0258fa36c81fe74f1e91b651fcd567a'
