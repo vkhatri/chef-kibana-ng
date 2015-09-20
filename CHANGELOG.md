@@ -3,6 +3,17 @@ kibana-ng CHANGELOG
 
 This file is used to list changes made in each version of the kibana-ng cookbook.
 
+0.2.3
+-----
+
+- Virender Khatri - bump kibana version to 4.1.2
+
+- Virender Khatri - fix rubocop check
+
+- Virender Khatri - rename source install method to tarball
+
+- Virender Khatri - add tarball sha256sums to helper method
+
 0.1.9
 -----
 
