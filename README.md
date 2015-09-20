@@ -45,10 +45,6 @@ This cookbook was tested on Amazon Linux & Ubuntu and expected to work on other 
 
 * `default['kibana']['version']` (default: `4.1.2`): kibana version
 
-* `default['kibana']['tarball_url']` (default: ): kibana download tarball url
-
-* `default['kibana']['tarball_checksum']` (default: version checksum hash): kibana tarball sha256sum
-
 * `default['kibana']['user']` (default: `kibana`): kibana user
 
 * `default['kibana']['group']` (default: `kibana`): kibana group
@@ -72,8 +68,6 @@ This cookbook was tested on Amazon Linux & Ubuntu and expected to work on other 
 * `default['kibana']['conf_dir']` (default: `/etc/kibana`): kibana yaml configuration file directory
 
 * `default['kibana']['install_dir']` (default: `/opt/kibana/kibana`): kibana install / current version location, symlink to current version location
-
-* `default['kibana']['version_dir']` (default: `/opt/kibana/kibana-VERSION`): kibana version's directory location
 
 * `default['kibana']['daemon']` (default: `/opt/kibana/kibana/bin/kibana`): kibana bin location
 

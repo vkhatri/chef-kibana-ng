@@ -17,19 +17,22 @@
 # limitations under the License.
 #
 
-tarball_file = ::File.join(node['kibana']['parent_dir'], ::File.basename(node['kibana']['tarball_url']))
+tarball_url = "https://download.elasticsearch.org/kibana/kibana/kibana-#{node['kibana']['version']}-linux-x64.tar.gz"
+tarball_checksum = tarball_sha256sum(node['kibana']['version'])
+tarball_file = ::File.join(node['kibana']['parent_dir'], ::File.basename('tarball_url'))
+version_dir  = node['kibana']['parent_dir'] + '/kibana-' + node['kibana']['version'] + '-linux-x64'
 
 # stop kibana service if running for version upgrade
 service 'kibana' do
   action :stop
-  only_if { ::File.exist?("/etc/init.d/#{node['kibana']['service_name']}") && !::File.exist?(node['kibana']['version_dir']) }
+  only_if { ::File.exist?("/etc/init.d/#{node['kibana']['service_name']}") && !::File.exist?(version_dir) }
 end
 
 # kibana version tarball
 remote_file tarball_file do
-  source node['kibana']['tarball_url']
-  checksum node['kibana']['tarball_checksum'][node['kibana']['version']]
-  not_if { ::File.exist?(::File.join(node['kibana']['version_dir'], 'bin', 'kibana')) }
+  source tarball_url
+  checksum tarball_checksum
+  not_if { ::File.exist?(::File.join(version_dir, 'bin', 'kibana')) }
 end
 
 # extract tarball
@@ -39,7 +42,7 @@ execute 'extract_kibana_tarball' do
   umask node['kibana']['umask']
   cwd node['kibana']['parent_dir']
   command "tar xzf #{tarball_file}"
-  creates ::File.join(node['kibana']['version_dir'], 'bin', 'kibana')
+  creates ::File.join(version_dir, 'bin', 'kibana')
   notifies :restart, 'service[kibana]', :delayed
 end
 
@@ -49,7 +52,7 @@ end
 
 # link current version_dir to install_dir
 link node['kibana']['install_dir'] do
-  to node['kibana']['version_dir']
+  to version_dir
   owner node['kibana']['user']
   group node['kibana']['group']
   notifies :restart, 'service[kibana]', :delayed
