@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-tarball_file  = ::File.join(node['kibana']['parent_dir'], ::File.basename(node['kibana']['tarball_url']))
+tarball_file = ::File.join(node['kibana']['parent_dir'], ::File.basename(node['kibana']['tarball_url']))
 
 # stop kibana service if running for version upgrade
 service 'kibana' do

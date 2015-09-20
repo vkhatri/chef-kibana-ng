@@ -43,7 +43,7 @@ This cookbook was tested on Amazon Linux & Ubuntu and expected to work on other 
 ## Core Attributes
 
 
-* `default['kibana']['version']` (default: `4.1.1`): kibana version
+* `default['kibana']['version']` (default: `4.1.2`): kibana version
 
 * `default['kibana']['tarball_url']` (default: ): kibana download source url
 
