@@ -12,7 +12,7 @@ default['kibana']['service_name'] = 'kibana'
 default['kibana']['service_type'] = 'sysv' # options: sysv
 default['kibana']['notify_restart'] = true
 
-default['kibana']['install_method'] = 'source' # options: source
+default['kibana']['install_method'] = 'tarball' # options: tarball
 
 default['kibana']['auth_users']['guest'] = '$apr1$cA/eVUgT$aIoWUPwV5uONJoYslb7lg0'
 

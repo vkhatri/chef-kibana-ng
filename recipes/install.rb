@@ -31,6 +31,6 @@ include_recipe 'kibana-ng::user'
   end
 end
 
-fail "invalid install method, valid install methods are 'source'" unless %w(source).include?(node['kibana']['install_method'])
+fail "invalid install method, valid install methods are 'tarball'" unless %w(tarball).include?(node['kibana']['install_method'])
 
 include_recipe "kibana-ng::#{node['kibana']['install_method']}"

@@ -35,7 +35,7 @@ This cookbook was tested on Amazon Linux & Ubuntu and expected to work on other 
 
 - `kibana-ng::service` - configure kibana service
 
-- `kibana-ng::source` - install kibana from source
+- `kibana-ng::tarball` - install kibana from tarball
 
 - `kibana-ng::user` - install user / group for kibana
 
@@ -45,9 +45,9 @@ This cookbook was tested on Amazon Linux & Ubuntu and expected to work on other 
 
 * `default['kibana']['version']` (default: `4.1.2`): kibana version
 
-* `default['kibana']['tarball_url']` (default: ): kibana download source url
+* `default['kibana']['tarball_url']` (default: ): kibana download tarball url
 
-* `default['kibana']['tarball_checksum']` (default: version checksum hash): kibana source sha256sum
+* `default['kibana']['tarball_checksum']` (default: version checksum hash): kibana tarball sha256sum
 
 * `default['kibana']['user']` (default: `kibana`): kibana user
 
