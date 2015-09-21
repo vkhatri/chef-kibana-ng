@@ -4,6 +4,6 @@ def tarball_sha256sum(version)
     '4.1.1' => '6f42d25f337fd49f38e2af81b9ab6e0c987a199a8c0b2e1410d072f812cb4520', '4.1.2' => '5f6213f7ac7ef71016a6750f09e7316ccc9bca139bc5389b417395b179bc370c'
   }
   sha256sum = sha256sums[version]
-  fail "sha256sum is missing for elasticsearch kibana version #{version}" unless sha256sum
+  fail "sha256sum is missing for kibana version #{version}" unless sha256sum
   sha256sum
 end
